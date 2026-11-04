@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Alpha Brix emblem">
+  <defs>
+    <linearGradient id="ab-g" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#E3192C"/>
+      <stop offset="1" stop-color="#2B2C92"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" fill="url(#ab-g)" stroke="#0B0B10" stroke-width="3"/>
+  <path d="M24 66 36 38 48 66Z" fill="#fff"/>
+  <rect x="24" y="70" width="24" height="5" fill="#fff"/>
+  <path d="M60 36c14-4 26 0 22 10-2 5-8 7-12 8 9 1 14 6 11 13-4 9-20 10-27 8M64 38l-6 40" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M84 40 98 58M98 40 84 58" stroke="#F4D21F" stroke-width="5.5" stroke-linecap="round"/>
+</svg>
