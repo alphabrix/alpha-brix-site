@@ -22,9 +22,9 @@
   --ok: #1E9E55;
   --shadow: 0 1px 2px rgba(10, 30, 59, .06), 0 8px 24px -12px rgba(10, 30, 59, .18);
 
-  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
-  --body: "Public Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --display: "Geist", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --body: "Geist", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 
   --container: 1240px;
   --gutter: clamp(16px, 4vw, 32px);
@@ -97,16 +97,15 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 h1, h2, h3 {
   font-family: var(--display);
-  font-variation-settings: "wdth" 112;
-  font-weight: 750;
+  font-weight: 650;
   line-height: 1.05;
-  letter-spacing: -.02em;
+  letter-spacing: -.035em;
   margin: 0;
   text-wrap: balance;
 }
 h1 { font-size: clamp(2.4rem, 5.4vw, 4.4rem); }
 h2 { font-size: clamp(1.75rem, 3.2vw, 2.6rem); }
-h3 { font-size: 1.2rem; font-weight: 650; letter-spacing: -.01em; }
+h3 { font-size: 1.2rem; font-weight: 600; letter-spacing: -.02em; }
 p { margin: 0; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .i { width: 1.1em; height: 1.1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
@@ -135,7 +134,7 @@ p { margin: 0; }
   --b: var(--ink);
   display: inline-flex; align-items: center; justify-content: center; gap: .55em;
   min-height: 48px; padding: 0 1.4em;
-  font: 650 .9rem/1 var(--body); letter-spacing: .04em; text-transform: uppercase;
+  font: 550 .92rem/1 var(--body); letter-spacing: -.005em;
   text-decoration: none; border-radius: var(--radius);
   border: 1.5px solid transparent; cursor: pointer;
   transition: background-color .15s, color .15s, border-color .15s, transform .15s;
@@ -178,7 +177,7 @@ p { margin: 0; }
 .header__in { display: flex; align-items: center; gap: 24px; height: var(--header-h); }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; flex: none; }
 .brand__text { display: flex; flex-direction: column; line-height: 1; }
-.brand__text strong { font: 800 1.2rem/1 var(--display); font-variation-settings: "wdth" 118; letter-spacing: .01em; color: var(--brand-ink); }
+.brand__text strong { font: 700 1.15rem/1 var(--display); letter-spacing: -.01em; color: var(--brand-ink); }
 .brand__text small { font: 500 .62rem/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
 .nav { display: flex; gap: 4px; margin-left: auto; }
 .nav a {
@@ -240,7 +239,7 @@ p { margin: 0; }
 .creds__in { display: grid; grid-template-columns: repeat(4, 1fr); }
 .cred { display: flex; align-items: baseline; gap: 12px; padding: 22px 20px; border-left: 1px solid var(--band-line); }
 .cred:first-child { border-left: 0; padding-left: 0; }
-.cred strong { font: 800 1.5rem/1 var(--display); font-variation-settings: "wdth" 115; color: var(--accent); }
+.cred strong { font: 650 1.5rem/1 var(--display); letter-spacing: -.03em; color: var(--accent); }
 .cred span { font-size: .9rem; color: var(--band-muted); }
 
 /* ---------- Sections ---------- */
@@ -312,7 +311,7 @@ p { margin: 0; }
 
 .ppe { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .ppe li { display: flex; flex-direction: column; gap: 10px; padding: 22px; background: var(--surface); min-height: 150px; }
-.ppe__t { font: 650 1.1rem/1.2 var(--display); font-variation-settings: "wdth" 108; color: var(--ink); }
+.ppe__t { font: 650 1.1rem/1.2 var(--display); color: var(--ink); }
 .ppe a { margin-top: auto; display: inline-flex; align-items: center; gap: .4em; font-size: .85rem; font-weight: 650; color: var(--accent-ink); text-decoration: none; }
 
 /* ---------- Bands (fumigation) ---------- */
@@ -365,7 +364,7 @@ p { margin: 0; }
 .quote figcaption { display: grid; gap: 2px; font-size: .88rem; color: var(--muted); padding-top: 16px; border-top: 1px solid var(--line); }
 .quote figcaption strong { color: var(--ink); font-size: .95rem; }
 .quote--lead { grid-row: span 2; background: var(--band); border-color: var(--band); color: #fff; }
-.quote--lead blockquote { font: 650 clamp(1.5rem, 2.4vw, 2rem)/1.2 var(--display); font-variation-settings: "wdth" 108; letter-spacing: -.01em; }
+.quote--lead blockquote { font: 550 clamp(1.5rem, 2.4vw, 2rem)/1.2 var(--display); letter-spacing: -.025em; }
 .quote--lead figcaption { border-color: var(--band-line); color: var(--band-muted); }
 .quote--lead figcaption strong { color: var(--accent); }
 
