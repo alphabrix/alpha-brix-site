@@ -67,7 +67,7 @@ export const products = [
     items: ['Packaging boxes'],
   },
   {
-    code: 'AB-06', slug: 'fumigation', title: 'Fumigation & Disinfection', img: 'fumigation.png',
+    code: 'AB-06', slug: 'fumigation', title: 'Fumigation & Disinfection', short: 'Fumigation', img: 'fumigation.png',
     summary: 'Targeted fumigation and disinfection using EPA approved chemicals, with lasting protection.',
     items: ['Targeted disinfection services', 'EPA approved chemicals', 'Lasting protection'],
     link: '/fumigation/',
@@ -95,16 +95,24 @@ export const fumigation = {
     ['Outcome', 'Lasting protection'],
   ],
   types: [
-    { title: 'Wood treatment', note: 'Includes Wood Destroying Insect Reports (WDIR)' },
-    { title: 'Reptile treatment', note: 'Snakes and other reptiles cleared from homes and compounds' },
-    { title: 'Flying insect treatment', note: 'Mosquitoes, flies and other flying pests' },
-    { title: 'Crawling insects', note: 'Cockroaches, ants, bedbugs and termites' },
-    { title: 'Tree fumigation', note: 'Compounds, farms and orchards' },
-    { title: 'Tunnel and underground fumigation', note: 'Drains, ducts and enclosed spaces' },
+    { title: 'Wood treatment', note: 'Includes Wood Destroying Insect Reports (WDIR)', icon: 'wood' },
+    { title: 'Reptile treatment', note: 'Snakes and other reptiles cleared from homes and compounds', icon: 'reptile' },
+    { title: 'Flying insect treatment', note: 'Mosquitoes, flies and other flying pests', icon: 'fly' },
+    { title: 'Crawling insects', note: 'Cockroaches, ants, bedbugs and termites', icon: 'bug' },
+    { title: 'Tree fumigation', note: 'Compounds, farms and orchards', icon: 'tree' },
+    { title: 'Tunnel and underground fumigation', note: 'Drains, ducts and enclosed spaces', icon: 'tunnel' },
   ],
   booking: [
-    { title: 'On-the-spot treatment', note: 'A one-off visit, charged at a set rate.' },
-    { title: 'Scheduled treatment', note: 'Regular visits on a timetable we agree with you.' },
+    {
+      title: 'On-the-spot treatment', note: 'A one-off visit, charged at a set rate.', icon: 'bolt',
+      points: ['A single visit to treat the problem', 'Charged at a set rate', 'Response within 24 hours, Monday to Saturday'],
+      cta: 'Book on-the-spot treatment',
+    },
+    {
+      title: 'Scheduled treatment', note: 'Regular visits on a timetable we agree with you.', icon: 'calendar',
+      points: ['Visits on a timetable agreed with you', 'Lasting protection through follow-up procedures', 'Suits restaurants, offices, warehouses and homes'],
+      cta: 'Set up a schedule',
+    },
   ],
 };
 
@@ -115,9 +123,9 @@ export const pillars = [
 ];
 
 export const commitments = [
-  { title: 'EPA approved chemicals', text: 'Every fumigation and disinfection job uses chemicals approved by the Environmental Protection Agency.' },
-  { title: 'PPA certified', text: 'Alpha Brix is certified with the Public Procurement Authority and meets national procurement standards.' },
-  { title: 'Safety and health', text: 'Safety and health are built into every procedure, giving lasting protection through solid follow-up.' },
+  { icon: 'leaf', title: 'EPA approved chemicals', text: 'Every fumigation and disinfection job uses chemicals approved by the Environmental Protection Agency.' },
+  { icon: 'badge', title: 'PPA certified', text: 'Alpha Brix is certified with the Public Procurement Authority and meets national procurement standards.' },
+  { icon: 'hardhat', title: 'Safety and health', text: 'Safety and health are built into every procedure, giving lasting protection through solid follow-up.' },
 ];
 
 export const testimonials = [

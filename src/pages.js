@@ -15,7 +15,7 @@ const testimonialGrid = () => `
 
 const fumiTypes = () => `
 <ol class="types">
-  ${fumigation.types.map((t, i) => `<li><span class="types__n">${pad(i + 1)}</span><div><h3>${t.title}</h3><p>${t.note}</p></div></li>`).join('')}
+  ${fumigation.types.map((t, i) => `<li><span class="types__icon">${icon[t.icon]}</span><div><span class="types__n">${pad(i + 1)}</span><h3>${t.title}</h3><p>${t.note}</p></div></li>`).join('')}
 </ol>`;
 
 const specTable = () => `
@@ -62,6 +62,12 @@ ${credStrip()}
     <div>
       <p class="eyebrow">Who we are</p>
       <h2>An innovative company crafting custom solutions.</h2>
+      <dl class="stats">
+        <div><dt>Support line</dt><dd>24/7</dd></div>
+        <div><dt>Fumigation response</dt><dd>&lt;24<small>h</small></dd></div>
+        <div><dt>Product lines</dt><dd>${products.length}</dd></div>
+        <div><dt>PPE items</dt><dd>${ppe.length}</dd></div>
+      </dl>
     </div>
     <div class="prose">
       <p>Alpha Brix Limited uses advanced chemical and non-chemical means to solve problems by crafting custom solutions. We render eco-conscious services where necessary and manufacture smart products using a targeted approach.</p>
@@ -115,17 +121,20 @@ ${ctaBand(L)}`,
     title: 'Products & PPE | Alpha Brix Company Limited',
     description: 'Industrial alcohol, agrochemicals, hygiene products, packaging boxes, Wellington boots and certified safety PPE from Alpha Brix, Accra.',
     body: (L, a) => `
-${pageHead({ eyebrow: 'Products', title: 'Manufactured and traded products', intro: 'A range of products, each made and handled under good manufacturing practice. Ask us about grades, volumes and delivery anywhere in Ghana.' })}
+${pageHead({ eyebrow: 'Products', title: 'Manufactured and traded products', intro: 'A range of products, each made and handled under good manufacturing practice. Ask us about grades, volumes and delivery.',
+  facts: [[products.length, 'Product lines'], [ppe.length, 'PPE items'], ['EPA', 'Approved chemicals'], ['GMP', 'Manufacturing practice']] }, L)}
 <section class="section section--tight">
   <div class="container">
-    <nav class="jump" aria-label="Product lines">
-      ${products.map((p) => `<a href="#${p.slug}"><span class="code">${p.code}</span>${esc(p.title)}</a>`).join('')}
-      <a href="#ppe"><span class="code">TR</span>Safety &amp; PPE</a>
+    <nav class="jump" aria-label="Product lines" data-jump>
+      <div class="jump__in">
+        ${products.map((p) => `<a href="#${p.slug}"><span class="code">${p.code}</span>${esc(p.short || p.title)}</a>`).join('')}
+        <a href="#ppe"><span class="code">TR</span>Safety &amp; PPE</a>
+      </div>
     </nav>
     <div class="plist">
       ${products.map((p) => `
       <article class="prow" id="${p.slug}">
-        <img src="${a('img/' + p.img)}" alt="${esc(p.title)}" loading="lazy" width="800" height="600">
+        <div class="prow__media"><img src="${a('img/' + p.img)}" alt="${esc(p.title)}" loading="lazy" width="800" height="600"></div>
         <div class="prow__body">
           <span class="code">${p.code}</span>
           <h2>${esc(p.title)}</h2>
@@ -203,7 +212,14 @@ ${ctaBand(L, 'Tell us what you need and how much of it.')}`,
       </div>
     </div>
     <div class="booking">
-      ${fumigation.booking.map((b, i) => `<div class="booking__item"><span class="types__n">${pad(i + 1)}</span><h3>${b.title}</h3><p>${b.note}</p></div>`).join('')}
+      ${fumigation.booking.map((b, i) => `
+      <div class="booking__item">
+        <div class="booking__head"><span class="booking__icon">${icon[b.icon]}</span><span class="types__n">Option ${pad(i + 1)}</span></div>
+        <h3>${b.title}</h3>
+        <p>${b.note}</p>
+        <ul class="booking__list">${b.points.map((pt) => `<li>${icon.check}<span>${pt}</span></li>`).join('')}</ul>
+        <a class="btn ${i ? 'btn--outline' : 'btn--accent'}" href="${L('/contact/')}?topic=${encodeURIComponent('Fumigation service')}#quote">${b.cta} ${icon.arrow}</a>
+      </div>`).join('')}
     </div>
   </div>
 </section>
@@ -215,7 +231,8 @@ ${ctaBand(L, 'Pests today? We can usually be there within 24 hours.')}`,
     title: 'About Alpha Brix | Innovation, Safety & Responsibility',
     description: 'Alpha Brix Company Limited uses advanced chemical and non-chemical means to craft custom solutions. EPA approved chemicals, PPA certified, skilled local experts.',
     body: (L, a) => `
-${pageHead({ eyebrow: 'About us', title: 'An innovative company crafting custom solutions.', intro: 'Alpha Brix Limited uses advanced chemical and non-chemical means to solve problems by crafting custom solutions. We render eco-conscious services where necessary and manufacture smart products using a targeted approach.' })}
+${pageHead({ eyebrow: 'About us', title: 'An innovative company crafting custom solutions.', intro: 'Alpha Brix Limited uses advanced chemical and non-chemical means to solve problems by crafting custom solutions. We render eco-conscious services where necessary and manufacture smart products using a targeted approach.',
+  facts: [['24/7', 'Support line'], ['EPA', 'Approved chemicals'], ['PPA', 'Certified supplier'], ['GMP', 'Manufacturing practice']] }, L)}
 <section class="section section--tight">
   <div class="container split split--media">
     <img class="split__img" src="${a('img/hero-distillation.png')}" alt="Distillation equipment at an Alpha Brix facility" loading="lazy" width="900" height="900">
@@ -237,7 +254,7 @@ ${pageHead({ eyebrow: 'About us', title: 'An innovative company crafting custom 
       </div>
     </div>
     <div class="commit">
-      ${commitments.map((c) => `<div class="commit__item">${icon.shield}<h3>${c.title}</h3><p>${c.text}</p></div>`).join('')}
+      ${commitments.map((c) => `<div class="commit__item"><span class="commit__icon">${icon[c.icon]}</span><h3>${c.title}</h3><p>${c.text}</p></div>`).join('')}
     </div>
   </div>
 </section>
@@ -260,8 +277,9 @@ ${ctaBand(L)}`,
     id: 'contact', path: '/contact/',
     title: 'Contact Alpha Brix | 24/7 Phone, WhatsApp & Email',
     description: 'Call +233 559 582 044 or WhatsApp Alpha Brix any time. Email alphabrixgh@gmail.com. Request a quote for fumigation, alcohol, hygiene products and PPE.',
-    body: () => `
-${pageHead({ eyebrow: 'Contact', title: 'Always on. Always ready.', intro: 'Business enquiries, quotes and emergency call-outs by phone, WhatsApp or email, day or night.' })}
+    body: (L) => `
+${pageHead({ eyebrow: 'Contact', title: 'Always on. Always ready.', intro: 'Business enquiries, quotes and emergency call-outs by phone, WhatsApp or email, day or night.',
+  facts: [['24/7', 'Phone and WhatsApp'], ['&lt;24h', 'Fumigation response'], [company.phones.length, 'Phone lines'], ['Accra', 'Ghana']] }, L)}
 <section class="section section--tight">
   <div class="container contact">
     <div class="contact__info">

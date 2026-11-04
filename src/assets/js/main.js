@@ -84,6 +84,30 @@
     start();
   }
 
+  /* ---- Products tab bar: highlight the section in view ---- */
+  var jump = document.querySelector('[data-jump]');
+  if (jump && 'IntersectionObserver' in window) {
+    var links = jump.querySelectorAll('a');
+    var byId = {};
+    links.forEach(function (l) { byId[l.getAttribute('href').slice(1)] = l; });
+    var setActive = function (id) {
+      links.forEach(function (l) { l.classList.remove('is-active'); });
+      var link = byId[id];
+      if (!link) return;
+      link.classList.add('is-active');
+      var bar = link.parentElement;
+      var left = link.offsetLeft - bar.clientWidth / 2 + link.clientWidth / 2;
+      bar.scrollTo({ left: left, behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    Object.keys(byId).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+
   /* ---- Accra clock ---- */
   var clock = document.querySelector('[data-clock]');
   if (clock) {

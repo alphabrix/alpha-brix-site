@@ -1,13 +1,20 @@
 import { company, quoteTopics } from './data/site.js';
 import { esc, icon, waLink } from './layout.js';
 
-export const pageHead = ({ eyebrow, title, intro }) => `
+export const pageHead = ({ eyebrow, title, intro, facts }, L) => `
 <section class="pagehead">
   <div class="container">
+    ${L ? `<nav class="crumbs" aria-label="Breadcrumb"><a href="${L('/')}">Home</a><span aria-hidden="true">/</span><span aria-current="page">${eyebrow}</span></nav>` : ''}
     <p class="eyebrow">${eyebrow}</p>
     <h1>${title}</h1>
     ${intro ? `<p class="lede">${intro}</p>` : ''}
   </div>
+  ${facts ? `
+  <div class="facts">
+    <ul class="container facts__in">
+      ${facts.map(([v, k]) => `<li><strong>${v}</strong><span>${k}</span></li>`).join('')}
+    </ul>
+  </div>` : ''}
 </section>`;
 
 export const credStrip = () => `

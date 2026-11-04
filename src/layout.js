@@ -18,6 +18,16 @@ export const icon = {
   badge: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m9 14-2 7 5-3 5 3-2-7"/><path d="m9.5 9 1.8 1.8L14.8 7.5"/></svg>',
   headset: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1"/><rect x="17" y="14" width="4" height="6" rx="1"/><path d="M19 20a4 4 0 0 1-4 3h-2"/></svg>',
   factory: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V10l6 4V10l6 4V4h6v17Z"/><path d="M7 18h2M12 18h2M17 18h1"/></svg>',
+  wood: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="7" cy="12" rx="3.5" ry="6"/><ellipse cx="7" cy="12" rx="1.2" ry="2.5"/><path d="M7 6h11a3.5 6 0 0 1 0 12H7"/></svg>',
+  reptile: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18c2 2 5 2 7 0s1-5 3-6 5 1 6-1-1-5-4-5h-1"/><path d="M14 6l-2-1M14 6l-2 1"/><circle cx="16.5" cy="5.8" r=".5"/></svg>',
+  fly: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="15" rx="2.8" ry="5"/><path d="M12 10c-2-4-7-5-8-2s3 5 5.5 5M12 10c2-4 7-5 8-2s-3 5-5.5 5"/><path d="m10.5 7-1-2.5M13.5 7l1-2.5"/></svg>',
+  bug: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="14" rx="4" ry="6"/><path d="M12 8v12M8 11H4M8 15H3M8.5 18l-3 2.5M16 11h4M16 15h5M15.5 18l3 2.5M10 8.5 8 5M14 8.5l2-3.5"/></svg>',
+  tree: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22v-6M9 19l3-3 3 3"/><path d="M12 16c-5 0-7.5-3-6.5-6 .3-2.5 2.5-4 4.5-4 1-3 5-3 6 0 2.2 0 4 2 3.5 5-.5 3-3 5-7.5 5Z"/></svg>',
+  tunnel: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20v-8a9 9 0 0 1 18 0v8M7 20v-8a5 5 0 0 1 10 0v8M2 20h20"/></svg>',
+  hardhat: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 18h20M4 18v-3a8 8 0 0 1 16 0v3"/><path d="M10 7.5V5h4v2.5M9 11V8M15 11V8"/></svg>',
+  bolt: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg>',
+  calendar: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4M8 14h2M14 14h2M8 17h2"/></svg>',
+  check: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>',
   external: '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>',
 };
 
