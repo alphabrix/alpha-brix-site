@@ -1,5 +1,5 @@
 import { company, heroSlides, products, ppe, fumigation, pillars, commitments, testimonials } from './data/site.js';
-import { esc, icon } from './layout.js';
+import { esc, icon, brandIcon } from './layout.js';
 import { pageHead, credStrip, productCard, ctaBand, quoteForm, waLink } from './partials.js';
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -278,9 +278,18 @@ ${pageHead({ eyebrow: 'Contact', title: 'Always on. Always ready.', intro: 'Busi
         <span class="live__state">Support active</span>
       </div>
       <div class="socials">
-        <a href="${waLink()}" target="_blank" rel="noopener">${icon.whatsapp} WhatsApp</a>
-        ${company.socials.map((s) => `<a href="${s.href}" target="_blank" rel="noopener">${s.name}</a>`).join('')}
-        <span class="socials__h">${company.socials[0].handle}</span>
+        <h2 class="socials__title">Follow and message us</h2>
+        <ul class="socials__grid">
+          ${[{ name: 'WhatsApp', key: 'whatsapp', handle: company.phones[0].display, href: waLink(), cta: 'Chat now' },
+             ...company.socials.map((s) => ({ ...s, cta: 'Follow' }))].map((s) => `
+          <li>
+            <a class="social social--${s.key}" href="${s.href}" target="_blank" rel="noopener" aria-label="${s.name}: ${s.handle}">
+              <span class="social__icon">${brandIcon[s.key]}</span>
+              <span class="social__text"><strong>${s.name}</strong><span>${s.handle}</span></span>
+              <span class="social__cta">${s.cta} ${icon.external}</span>
+            </a>
+          </li>`).join('')}
+        </ul>
       </div>
     </div>
     ${quoteForm()}

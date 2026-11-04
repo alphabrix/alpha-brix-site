@@ -14,15 +14,15 @@ export const company = {
   whatsapp: '233559582044',
   hours: 'Monday to Sunday, 24 hours',
   socials: [
-    { name: 'Instagram', handle: '@alphabrixltd', href: 'https://instagram.com/alphabrixltd' },
-    { name: 'TikTok', handle: '@alphabrixltd', href: 'https://tiktok.com/@alphabrixltd' },
-    { name: 'Snapchat', handle: '@alphabrixltd', href: 'https://snapchat.com/add/alphabrixltd' },
+    { name: 'Instagram', key: 'instagram', handle: '@alphabrixltd', href: 'https://instagram.com/alphabrixltd' },
+    { name: 'TikTok', key: 'tiktok', handle: '@alphabrixltd', href: 'https://tiktok.com/@alphabrixltd' },
+    { name: 'Snapchat', key: 'snapchat', handle: '@alphabrixltd', href: 'https://snapchat.com/add/alphabrixltd' },
   ],
   credentials: [
-    { code: 'EPA', text: 'Approved chemicals' },
-    { code: 'PPA', text: 'Certified supplier' },
-    { code: '24/7', text: 'Phone & WhatsApp support' },
-    { code: 'GMP', text: 'Good manufacturing practice' },
+    { code: 'EPA', text: 'Approved chemicals', icon: 'leaf' },
+    { code: 'PPA', text: 'Certified supplier', icon: 'badge' },
+    { code: '24/7', text: 'Phone & WhatsApp support', icon: 'headset' },
+    { code: 'GMP', text: 'Good manufacturing practice', icon: 'factory' },
   ],
 };
 

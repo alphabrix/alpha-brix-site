@@ -207,7 +207,7 @@ p { margin: 0; }
 /* ---------- Hero ---------- */
 .hero {
   position: relative; overflow: hidden;
-  padding-block: clamp(48px, 7vw, 96px);
+  padding-block: clamp(48px, 7vw, 96px) calc(clamp(48px, 7vw, 96px) + 44px);
   background:
     linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 64px 64px,
     linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 64px 64px,
@@ -235,17 +235,41 @@ p { margin: 0; }
 .slider__dots button[aria-current="true"] { background: var(--accent); }
 
 /* ---------- Credentials ---------- */
-.creds { background: var(--band); color: var(--band-ink); }
-.creds__in { display: grid; grid-template-columns: repeat(4, 1fr); }
-.cred { display: flex; align-items: baseline; gap: 12px; padding: 22px 20px; border-left: 1px solid var(--band-line); }
-.cred:first-child { border-left: 0; padding-left: 0; }
-.cred strong { font: 650 1.5rem/1 var(--display); letter-spacing: -.03em; color: var(--accent); }
-.cred span { font-size: .9rem; color: var(--band-muted); }
+.creds { position: relative; z-index: 2; margin-top: -44px; }
+.creds__in {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  background: var(--band); color: var(--band-ink);
+  border: 1px solid var(--band-line);
+  border-top: 3px solid var(--accent);
+  box-shadow: 0 24px 48px -24px rgba(0, 20, 50, .55);
+}
+.cred {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 26px 20px;
+  border-left: 1px solid var(--band-line);
+  transition: background-color .2s;
+}
+.cred:first-child { border-left: 0; }
+.cred:hover { background: color-mix(in srgb, #fff 4%, transparent); }
+.cred__icon {
+  display: grid; place-items: center; flex: none;
+  width: 48px; height: 48px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+.cred__icon .i { width: 24px; height: 24px; stroke-width: 1.7; }
+.cred__text { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0; min-height: 48px; }
+.cred__text strong { font: 650 1.55rem/1 var(--display); letter-spacing: -.03em; color: #fff; }
+.cred__text span { font-size: .84rem; line-height: 1.35; color: var(--band-muted); }
+@media (min-width: 1100px) { .cred__text span { white-space: nowrap; } }
 
 /* ---------- Sections ---------- */
 .section { padding-block: clamp(64px, 9vw, 120px); }
 .section--tight { padding-block: clamp(40px, 6vw, 72px); }
 .section--alt { background: var(--surface-2); }
+.creds + .section { padding-top: clamp(56px, 8vw, 104px); }
 .sechead {
   display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
   padding-bottom: 24px; margin-bottom: 40px; border-bottom: 1px solid var(--line);
@@ -388,11 +412,46 @@ p { margin: 0; }
 .live { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 24px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); font-size: .92rem; }
 .live strong { font: 500 1rem/1 var(--mono); font-variant-numeric: tabular-nums; }
 .live__state { margin-left: auto; font: 500 .7rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ok); }
-.socials { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 24px; }
-.socials a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid var(--line); font-size: .85rem; font-weight: 600; text-decoration: none; transition: border-color .15s; }
-.socials a:hover { border-color: var(--accent); }
-.socials a svg { width: 16px; height: 16px; color: #25D366; }
-.socials__h { font: 500 .8rem/1 var(--mono); color: var(--muted); }
+.socials { margin-top: 32px; }
+.socials__title { font: 500 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.socials__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.social {
+  --brand-bg: #333; --brand-fg: #fff;
+  display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 14px; row-gap: 10px;
+  align-items: center;
+  height: 100%; padding: 16px;
+  background: var(--surface); border: 1px solid var(--line);
+  text-decoration: none; color: var(--ink);
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+}
+.social:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--brand-bg); }
+.social__icon {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+  background: var(--brand-bg); color: var(--brand-fg);
+}
+.social__icon svg { width: 22px; height: 22px; }
+.social__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.social__text strong { font-size: 1rem; font-weight: 650; }
+.social__text span { font: 500 .78rem/1.3 var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+.social__cta {
+  grid-column: 1 / -1;
+  display: inline-flex; align-items: center; justify-content: space-between;
+  padding-top: 10px; border-top: 1px solid var(--line);
+  font-size: .82rem; font-weight: 600; color: var(--muted);
+  transition: color .2s;
+}
+.social__cta .i { width: 16px; height: 16px; transition: transform .2s; }
+.social:hover .social__cta { color: var(--ink); }
+.social:hover .social__cta .i { transform: translate(2px, -2px); }
+.social--whatsapp { --brand-bg: #25D366; }
+.social--instagram { --brand-bg: radial-gradient(circle at 30% 107%, #FDF497 0%, #FDF497 5%, #FD5949 45%, #D6249F 60%, #285AEB 90%); }
+.social--instagram:hover { border-color: #D6249F; }
+.social--tiktok { --brand-bg: #010101; }
+.social--tiktok .social__icon svg { filter: drop-shadow(1.5px 1.5px 0 #FE2C55) drop-shadow(-1.5px -1.5px 0 #25F4EE); }
+.social--tiktok:hover { border-color: #FE2C55; }
+.social--snapchat { --brand-bg: #FFFC00; --brand-fg: #111; }
+.social--snapchat .social__icon svg path { fill: #fff; stroke: #111; stroke-width: 1.2; }
+.social--snapchat:hover { border-color: #E6D800; }
 
 .qform { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); padding: clamp(24px, 4vw, 40px); box-shadow: var(--shadow); }
 .qform h2 { color: var(--brand-ink); font-size: clamp(1.6rem, 2.6vw, 2.1rem); }
@@ -423,6 +482,8 @@ p { margin: 0; }
 .footer__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .footer a { text-decoration: none; color: var(--band-ink); }
 .footer a:hover { color: var(--accent); }
+.footer__social { display: inline-flex; align-items: center; gap: 10px; }
+.footer__social svg { width: 16px; height: 16px; opacity: .85; }
 .footer__base { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-block: 20px; border-top: 1px solid var(--band-line); font: 500 .75rem/1.4 var(--mono); letter-spacing: .06em; }
 
 .wa-float {
@@ -447,7 +508,7 @@ p { margin: 0; }
   .hero::after { background: color-mix(in srgb, var(--bg) 70%, transparent); }
   .slider { aspect-ratio: 4 / 3; }
   .creds__in { grid-template-columns: 1fr 1fr; }
-  .cred:nth-child(3) { border-left: 0; padding-left: 0; }
+  .cred:nth-child(3) { border-left: 0; }
   .cred:nth-child(n+3) { border-top: 1px solid var(--band-line); }
   .commit, .booking { grid-template-columns: 1fr; }
   .header__cta { display: none; }
@@ -464,12 +525,13 @@ p { margin: 0; }
   .header__actions { margin-left: auto; }
 }
 @media (max-width: 600px) {
+  .socials__grid { grid-template-columns: 1fr; }
   body { font-size: 1rem; }
   .statusbar__live { display: none; }
   .statusbar__in { justify-content: center; }
   .pgrid, .quotes, .types, .ppe, .qform__grid, .footer__grid { grid-template-columns: 1fr; }
   .creds__in { grid-template-columns: 1fr; }
-  .cred { border-left: 0; padding-left: 0; border-top: 1px solid var(--band-line); }
+  .cred { border-left: 0; border-top: 1px solid var(--band-line); padding: 18px 20px; }
   .cred:first-child { border-top: 0; }
   .hero__actions .btn, .cta__actions .btn, .qform__actions .btn { flex: 1 1 100%; }
   .brand__text small { display: none; }

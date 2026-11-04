@@ -12,8 +12,14 @@ export const pageHead = ({ eyebrow, title, intro }) => `
 
 export const credStrip = () => `
 <section class="creds" aria-label="Certifications and support">
-  <div class="container creds__in">
-    ${company.credentials.map((c) => `<div class="cred"><strong>${c.code}</strong><span>${c.text}</span></div>`).join('')}
+  <div class="container">
+    <ul class="creds__in">
+      ${company.credentials.map((c) => `
+      <li class="cred">
+        <span class="cred__icon">${icon[c.icon]}</span>
+        <span class="cred__text"><strong>${c.code}</strong><span>${c.text}</span></span>
+      </li>`).join('')}
+    </ul>
   </div>
 </section>`;
 
