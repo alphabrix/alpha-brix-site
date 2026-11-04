@@ -1,5 +1,19 @@
 (function () {
   var root = document.documentElement;
+
+  /* ---- Opened straight from a folder (file://): there is no server to turn
+     "products/" into "products/index.html", so add it to internal links. ---- */
+  if (location.protocol === 'file:') {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (/^(https?:|mailto:|tel:|#)/.test(href)) return;
+      var url = new URL(href, location.href);
+      if (url.pathname.slice(-1) === '/') {
+        url.pathname += 'index.html';
+        a.href = url.href;
+      }
+    });
+  }
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---- Theme: follows the system until the visitor picks one ---- */
