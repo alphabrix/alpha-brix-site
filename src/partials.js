@@ -60,13 +60,17 @@ export const ctaBand = (L, heading = 'Need fumigation today, or a supply quote t
 </section>`;
 
 export const quoteForm = () => `
-<form class="qform" id="quote" novalidate data-wa="${company.whatsapp}" data-email="${company.email}">
+<form class="qform" id="quote" novalidate data-wa="${company.whatsapp}" data-email="${company.email}" data-key="${company.web3formsKey || ''}" data-phone="${company.phones[0].display}">
   <h2>Request a quote</h2>
-  <p class="qform__note">Fill in the form and choose how to send it. It opens WhatsApp or your email app with the message ready.</p>
+  <p class="qform__note">Fill in the form and choose how to send it: straight to our inbox by email, or as a ready-made WhatsApp message.</p>
   <div class="qform__grid">
     <div class="field">
       <label for="q-name">Your name</label>
       <input id="q-name" name="name" autocomplete="name" required>
+    </div>
+    <div class="field">
+      <label for="q-contact">Phone or email</label>
+      <input id="q-contact" name="contact" autocomplete="email" placeholder="So we can reply to you">
     </div>
     <div class="field">
       <label for="q-company">Business <span class="opt">(optional)</span></label>
@@ -87,7 +91,9 @@ export const quoteForm = () => `
       <textarea id="q-details" name="details" rows="4" placeholder="Quantities, grade, size of the space, preferred date"></textarea>
     </div>
   </div>
-  <p class="qform__error" id="q-error" role="alert" hidden>Add your name so we know who to reply to.</p>
+  <input type="checkbox" name="botcheck" class="qform__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <p class="qform__error" id="q-error" role="alert" hidden></p>
+  <p class="qform__status" id="q-status" role="status" hidden></p>
   <div class="qform__actions">
     <button class="btn btn--accent" type="submit" id="q-wa">${icon.whatsapp} Send on WhatsApp</button>
     <button class="btn btn--outline" type="button" id="q-mail">${icon.mail} Send by email</button>

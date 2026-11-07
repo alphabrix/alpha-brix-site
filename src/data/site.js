@@ -7,6 +7,10 @@ export const company = {
   city: 'Accra, Ghana',
   url: 'https://alpha-brix.com',
   email: 'alphabrixgh@gmail.com',
+  // Web3Forms access key (free, from https://web3forms.com, registered to the email above).
+  // Quote requests sent with "Send by email" are delivered to that inbox.
+  // Leave empty to fall back to opening the visitor's email app.
+  web3formsKey: 'f94e40f5-3fa1-4fc1-bdff-10c23628fbb5',
   phones: [
     { label: 'Primary', display: '+233 559 582 044', tel: '+233559582044', whatsapp: true },
     { label: 'Secondary', display: '+233 552 843 040', tel: '+233552843040' },

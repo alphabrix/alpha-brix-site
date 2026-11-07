@@ -69,6 +69,7 @@ export function layout({ page, depth, body }) {
     address: { '@type': 'PostalAddress', addressLocality: 'Accra', addressCountry: 'GH' },
     openingHours: 'Mo-Su 00:00-23:59',
     url: company.url,
+    logo: `${company.url}/assets/img/logo.jpg`,
     sameAs: company.socials.map((s) => s.href),
   };
 
@@ -83,9 +84,10 @@ export function layout({ page, depth, body }) {
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(page.title)}">
 <meta property="og:description" content="${esc(page.description)}">
-<meta property="og:image" content="${company.url}/assets/img/hero-distillation.png">
+<meta property="og:image" content="${company.url}/assets/img/logo-full.jpg">
 <meta name="theme-color" content="#002D62">
-<link rel="icon" href="${a('img/emblem.svg')}" type="image/svg+xml">
+<link rel="icon" href="${a('img/favicon.png')}" type="image/png">
+<link rel="apple-touch-icon" href="${a('img/apple-touch-icon.png')}">
 <script>
   (function () {
     try { var t = localStorage.getItem('ab-theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
@@ -113,7 +115,7 @@ export function layout({ page, depth, body }) {
 <header class="header" id="header">
   <div class="container header__in">
     <a class="brand" href="${L('/')}" aria-label="${company.short} home">
-      <img src="${a('img/emblem.svg')}" alt="" width="40" height="40">
+      <img src="${a('img/logo-emblem.png')}" alt="" width="44" height="44">
       <span class="brand__text"><strong>ALPHA BRIX</strong><small>Company Limited</small></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
@@ -135,7 +137,7 @@ ${body(L, a)}
   <div class="container footer__grid">
     <div class="footer__brand">
       <a class="brand brand--footer" href="${L('/')}">
-        <img src="${a('img/emblem.svg')}" alt="" width="40" height="40">
+        <img src="${a('img/logo-emblem.png')}" alt="" width="44" height="44">
         <span class="brand__text"><strong>ALPHA BRIX</strong><small>Company Limited</small></span>
       </a>
       <p>Chemical, hygiene and fumigation solutions from ${company.city}. EPA approved chemicals, PPA certified.</p>

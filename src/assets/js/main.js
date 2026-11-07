@@ -133,36 +133,91 @@
       }
     }
     var name = form.querySelector('#q-name');
+    var contact = form.querySelector('#q-contact');
     var error = form.querySelector('#q-error');
-    var build = function () {
-      var d = new FormData(form);
-      var who = String(d.get('name') || '').trim();
-      if (!who) {
-        error.hidden = false;
-        name.setAttribute('aria-invalid', 'true');
-        name.focus();
-        return null;
-      }
+    var status = form.querySelector('#q-status');
+    var mailBtn = form.querySelector('#q-mail');
+    var fail = function (field, msg) {
+      error.textContent = msg;
+      error.hidden = false;
+      field.setAttribute('aria-invalid', 'true');
+      field.focus();
+      return null;
+    };
+    var clear = function () {
       error.hidden = true;
       name.removeAttribute('aria-invalid');
-      var lines = ['Hello Alpha Brix, I would like a quote.', '', 'Name: ' + who];
+      contact.removeAttribute('aria-invalid');
+    };
+    var say = function (msg, state) {
+      status.textContent = msg;
+      status.dataset.state = state || '';
+      status.hidden = !msg;
+    };
+    // needContact: an emailed request must say how to reply; WhatsApp already carries the number.
+    var build = function (needContact) {
+      var d = new FormData(form);
       var get = function (k) { return String(d.get(k) || '').trim(); };
+      clear();
+      if (!get('name')) return fail(name, 'Add your name so we know who to reply to.');
+      if (needContact && !get('contact')) return fail(contact, 'Add a phone number or email so we can reply to you.');
+      var lines = ['Hello Alpha Brix, I would like a quote.', '', 'Name: ' + get('name')];
+      if (get('contact')) lines.push('Contact: ' + get('contact'));
       if (get('company')) lines.push('Business: ' + get('company'));
       lines.push('Need: ' + get('topic'));
       if (get('location')) lines.push('Location: ' + get('location'));
       if (get('details')) lines.push('', get('details'));
-      return { text: lines.join('\n'), subject: 'Quote request: ' + get('topic') };
+      return { text: lines.join('\n'), subject: 'Quote request: ' + get('topic'), get: get, bot: d.get('botcheck') };
+    };
+    var openMailApp = function (m) {
+      location.href = 'mailto:' + form.dataset.email + '?subject=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.text);
     };
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var m = build();
+      var m = build(false);
       if (m) window.open('https://wa.me/' + form.dataset.wa + '?text=' + encodeURIComponent(m.text), '_blank', 'noopener');
     });
-    form.querySelector('#q-mail').addEventListener('click', function () {
-      var m = build();
-      if (m) location.href = 'mailto:' + form.dataset.email + '?subject=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.text);
+    mailBtn.addEventListener('click', function () {
+      var key = form.dataset.key;
+      var m = build(!!key);
+      if (!m) return;
+      if (!key) return openMailApp(m);
+      if (m.bot) return say('Thanks, your request has been sent.', 'ok');
+      var get = m.get;
+      var payload = {
+        access_key: key,
+        subject: m.subject,
+        from_name: get('name') + ' via alpha-brix.com',
+        name: get('name'),
+        contact: get('contact'),
+        business: get('company'),
+        need: get('topic'),
+        location: get('location'),
+        details: get('details'),
+      };
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(get('contact'))) payload.replyto = get('contact');
+      mailBtn.disabled = true;
+      say('Sending…');
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (!res.success) throw new Error(res.message || 'Failed');
+          form.reset();
+          say('Thanks, your request has been sent. We will get back to you shortly.', 'ok');
+        })
+        .catch(function () {
+          say('');
+          error.textContent = 'We could not send that just now. Try WhatsApp, or call ' + (form.dataset.phone || 'us') + '.';
+          error.hidden = false;
+        })
+        .then(function () { mailBtn.disabled = false; });
     });
-    name.addEventListener('input', function () { if (name.value.trim()) { error.hidden = true; name.removeAttribute('aria-invalid'); } });
+    name.addEventListener('input', function () { if (name.value.trim()) clear(); });
+    contact.addEventListener('input', function () { if (contact.value.trim()) clear(); });
   }
 
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });

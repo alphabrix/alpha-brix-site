@@ -515,6 +515,10 @@ p { margin: 0; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
 .field [aria-invalid="true"] { border-color: var(--accent); }
 .qform__error { margin-top: 16px; color: var(--accent-ink); font-weight: 600; font-size: .92rem; }
+.qform__hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.qform__status { margin-top: 16px; padding: 12px 14px; border: 1px solid var(--line); background: var(--surface); font-weight: 600; font-size: .92rem; }
+.qform__status[data-state="ok"] { border-color: #1f9d55; color: #1f9d55; }
+.qform { position: relative; }
 .qform__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
 /* ---------- Footer ---------- */
